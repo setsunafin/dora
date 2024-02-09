@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  postgresdb:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - /data/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=th1s1ss3cr3t
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+
+  dora:
+    image: ghcr.io/setsunafin/dora:latest
+    command: -config=/app/config/explorer-config.yaml
+    ports:
+      - 8080:8080
+    volumes:
+      - /mnt/c/Users/rniko/repo/chain/dora/config:/app/config
+
+networks:
+  default:
